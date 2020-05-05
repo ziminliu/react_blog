@@ -8,6 +8,7 @@ import {
   FireOutlined,
 } from "@ant-design/icons";
 import '../public/style/pages/index.css'
+import Author from "../components/Author";
 
 const Home = () => {
   const [myList, setMylist] = useState([
@@ -67,7 +68,7 @@ const Home = () => {
           />
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-          右侧
+          <Author/>
         </Col>
       </Row>
     </div>
