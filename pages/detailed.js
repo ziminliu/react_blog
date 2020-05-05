@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { Row, Col } from "antd";
 import Header from "../components/Header";
-const Home = () => {
+const Detailed = () => {
   return (
     <div>
       <Head>
-        <title>Hello</title>
+        <title>Detailed</title>
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
@@ -19,4 +19,5 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+
+export default Detailed;
