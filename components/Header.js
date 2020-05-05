@@ -6,6 +6,7 @@ import {
   YoutubeOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
+import "../public/style/pages/comm.css";
 
 const Header = () => (
   <div className="header">

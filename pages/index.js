@@ -7,8 +7,10 @@ import {
   FolderOutlined,
   FireOutlined,
 } from "@ant-design/icons";
-import '../public/style/pages/index.css'
+import "../public/style/pages/index.css";
+import "../public/style/pages/comm.css";
 import Author from "../components/Author";
+import Advert from "../components/Advert";
 
 const Home = () => {
   const [myList, setMylist] = useState([
@@ -51,15 +53,15 @@ const Home = () => {
                 <div className="list-icon">
                   <span>
                     <CalendarOutlined />
-                      2019-06-28
+                    2019-06-28
                   </span>
                   <span>
                     <FolderOutlined />
-                       视频教程
+                    视频教程
                   </span>
                   <span>
                     <FireOutlined />
-                      5989人
+                    5989人
                   </span>
                 </div>
                 <div className="list-context">{item.context}</div>
@@ -68,7 +70,8 @@ const Home = () => {
           />
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-          <Author/>
+          <Author />
+          <Advert />
         </Col>
       </Row>
     </div>
