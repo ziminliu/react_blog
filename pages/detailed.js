@@ -10,14 +10,37 @@ import {
   FolderOutlined,
   FireOutlined,
 } from '@ant-design/icons';
-import ReactMarkdown from 'react-markdown';
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
 import axios from 'axios';
+import { useState } from 'react';
+import marked from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/monokai-sublime.css';
+import Tocify from '../components/tocify.tsx';
 
-const Detailed = () => {
-  let markdown = '# hello';
 
+const Detailed = props => {
+  const tocify = new Tocify();
+  const renderer = new marked.Renderer();
+
+  renderer.heading = function (text, level, raw) {
+    const anchor = tocify.add(text, level);
+    return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
+  };
+  marked.setOptions({
+    render: renderer,
+    gfm: true,
+    pedantic: false,
+    sanitize: false,
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    highlight: function (code) {
+      return hljs.highlightAuto(code).value;
+    },
+  });
+  let html = marked(props.article_content);
   return (
     <div>
       <Head>
@@ -41,24 +64,25 @@ const Detailed = () => {
               </Breadcrumb>
             </div>
             <div>
-              <div className='detailed-title'>React 实战视频教程</div>
+              <div className='detailed-title'>{props.title}</div>
               <div className='list-icon center'>
                 <span>
                   <CalendarOutlined />
-                  2019-06-28
+                  {props.addTime}
                 </span>
                 <span>
                   <FolderOutlined />
-                  视频教程
+                  {props.typeName}
                 </span>
                 <span>
                   <FireOutlined />
-                  5989人
+                  {props.view_count}人
                 </span>
               </div>
-              <div className='detailed-content'>
-                <ReactMarkdown source={markdown} escapeHtml={false} />
-              </div>
+              <div
+                className='detailed-content'
+                dangerouslySetInnerHTML={{ __html: html }}
+              ></div>
             </div>
           </div>
         </Col>
@@ -69,11 +93,8 @@ const Detailed = () => {
             <div className='detailed-nav comm-box'>
               <div className='detailed-nav comm-box'>
                 <div className='nav-title'>文章目录</div>
-                <MarkNav
-                  className='article-menu'
-                  source={markdown}
-                  ordered={true}
-                />
+                fjdslkj
+                {tocify && tocify.render()}
               </div>
             </div>
           </Affix>
@@ -83,12 +104,12 @@ const Detailed = () => {
     </div>
   );
 };
-Detailed.getInitalProps = async context => {
+Detailed.getInitialProps = async context => {
   console.log(context.query.id);
   let id = context.query.id;
   const promise = new Promise(resolve => {
-    axios('http://127.0.0.1:7001/default/getArticleById').then(res => {
-      console.log(res);
+    axios('http://127.0.0.1:7001/default/getArticleById/' + id).then(res => {
+      console.log(res.data.data[0]);
       resolve(res.data.data[0]);
     });
   });
