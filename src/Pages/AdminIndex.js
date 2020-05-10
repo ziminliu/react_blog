@@ -8,6 +8,9 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import '../static/css/AdminIndex.css';
+import { Route } from 'react-router-dom';
+import AddArticle from './AddArticle';
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -48,7 +51,9 @@ function AdminIndex() {
             className='site-layout-background'
             style={{ padding: 24, minHeight: 360 }}
           >
-            JSP的blog 管理系统
+            <div>
+              <Route path='/index/' exact component={AddArticle} />
+            </div>
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>JSPang.com</Footer>
