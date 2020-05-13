@@ -42,14 +42,15 @@ module.exports = appInfo => {
     agent: false,
   };
   config.security = {
-    scrf: {
+    csrf: {
       enable: false,
     },
-    domainWhiteList: [ '*' ],
+    domainWhiteList: ['*'],
   };
   config.cors = {
-    origin: '*',
-    allowMethods: ' GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS ',
+    origin: 'http://localhost:3000',
+    credentials: true, //允许cookie 跨域
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
 
   return {

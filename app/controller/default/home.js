@@ -14,6 +14,7 @@ class HomeController extends Controller {
       'article.introduce as introduce,' +
       "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s') as addTime," +
       'article.view_count as view_count,' +
+      'article.article_content as article_content,' +
       'type.typeName as typeName ' +
       'FROM article LEFT JOIN type ON article.type_id=type.id';
     const results = await this.app.mysql.query(sql);
@@ -36,6 +37,29 @@ class HomeController extends Controller {
       id;
     const result = await this.app.mysql.query(sql);
     this.ctx.body = { data: result };
+  }
+  // 得到类别和名称
+  async getTypeInfo() {
+    const result = await this.app.mysql.select('type');
+    this.ctx.body = { data: result };
+  }
+  // 根据类别id 获得文章列表
+  async getListById() {
+    const id = this.ctx.params.id;
+    const sql =
+      // 'select * from article  left join type on article.type_id=type.id';
+      'select article.id as id,' +
+      'article.title as title,' +
+      'article.introduce as introduce,' +
+      "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s') as addTime," +
+      'article.view_count as view_count,' +
+      'type.typeName as typeName ' +
+      'FROM article LEFT JOIN type ON article.type_id=type.id ' +
+      'WHERE type_id=' +
+      id;
+    const results = await this.app.mysql.query(sql);
+    this.ctx.body = { data: results };
+    // console.log(results);
   }
 }
 
