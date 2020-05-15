@@ -7,7 +7,8 @@ function Main() {
   return (
     <Router>
       <Route path='/' exact component={Login} />
-      <Route path='/index/' exact component={AdminIndex} />
+      {/* 含有子路由的组件不能设置精确匹配 */}
+      <Route path='/index/'  component={AdminIndex} />
     </Router>
   );
 }
