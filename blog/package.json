@@ -16,7 +16,7 @@
     "egg-init": "^1.17.3",
     "global": "^4.4.0",
     "highlight.js": "^10.0.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "markdown-navbar": "^1.4.1",
     "marked": "^1.0.0",
     "next": "9.3.6",
